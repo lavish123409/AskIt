@@ -1,0 +1,40 @@
+.profile {
+    padding: 30px;
+}
+
+.user-info {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    height: 150px;
+}
+
+.user-info > .MuiAvatar-root {
+    height: 70px;
+    width: 70px;
+    margin-left: 40px;
+    /* flex : 0.3; */
+    /* justify-self: flex-start; */
+    /* font-size: 2rem; */
+
+}
+
+.user-info > h2 {
+    margin-left: 150px;
+}
+
+.stats {
+    height: 100px;
+    /* vertical-align: middle; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.stats > h3 {
+    margin-top: auto;
+}
+
+.stats > h3 > span {
+    font-weight: 300;
+}

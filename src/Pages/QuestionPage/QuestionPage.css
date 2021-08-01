@@ -1,0 +1,35 @@
+.main-content {
+    display: flex;
+    /* height: 100vh; */
+}
+
+.qdummy-area {
+    flex: 0.2;
+    /* background:fixed; */
+    /* background-color: rgb(212, 208, 208) ; */
+    background-color: rgb(226, 225, 225);
+}
+
+.ans-feed {
+    flex: 0.6;
+    /* background-color: rgb(212, 208, 208) ; */
+    background-color: rgb(255, 255, 255);
+    /* overflow:auto; */
+}
+
+
+.question-box {
+    padding: 10px;
+    margin: 30px 20px;
+    background-color: white;
+    border: 2px solid black;
+}
+
+
+/* @media screen and ( max-width: 600px) {
+    .que-feed {
+        flex : 1;
+        margin: 30px;
+    }
+} */
+

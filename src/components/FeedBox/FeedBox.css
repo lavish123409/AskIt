@@ -1,0 +1,215 @@
+:root { 
+    --primary : rgb(83, 155, 223);
+    --secondary : rgb(69, 236, 69);
+}
+
+/* ---------Feed Box------------ */
+
+.feed-box {
+    padding: 10px;
+    margin: 30px 20px;
+    background-color: white;
+    border: 2px solid black;
+}
+
+
+/* ---------User who asked that question------------ */
+
+
+.user-area {
+    min-height: 30px;
+    /* background-color: blue; */
+    display: flex;
+    align-items: center;
+}
+
+.ua--link {
+    display: flex;
+    align-items: center;
+    color: black;
+    text-decoration : none;
+}
+
+.ua--link:hover {
+    text-decoration: underline;
+}
+
+.ua--avatar {
+    padding: 10px;
+}
+
+.user-area > h4 {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    
+}
+
+.user-area > small {
+    margin-left: auto;
+    margin-right: 20px;
+    color: rgb(146, 141, 141);
+}
+
+
+/* ---------Question Box------------ */
+
+.question-area {
+    min-height: 50px;
+    /* background-color: aquamarine; */
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+/* ---------Answer Area------------ */
+
+
+.answer-area {
+    min-height: 90px;
+    /* background-color: rgb(198, 211, 127); */
+    /* max-width: 300px; */
+    /* word-break: break-all; */
+}
+
+.answer {
+    padding: 10px;
+    font-weight: 400;
+    font-family: 'Montserrant Alternates' ,Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    overflow-x: hidden;
+}
+
+.answer-area > small {
+    padding: 10px;
+    font-weight: lighter;
+    margin-bottom: 20px;
+    color: rgb(146, 141, 141);
+}
+
+.ans-user-link {
+    text-decoration: none;
+}
+
+.ans-user-link:hover {
+    text-decoration: underline;
+}
+
+/* ---------Upvote , Downvote , Comment------------ */
+
+.options {
+    min-height: 10px;
+    margin-top: 15px;
+    /* background-color: rgb(221, 57, 57); */
+}
+
+ /* .options > MuiSvgIcon:root {
+    padding : 10px;
+    height: 1px;
+    width: 1px;
+}   */
+
+.opt-icon-container {
+    padding: 5px;
+    height: 30px;
+    width: 70px;
+    margin: 5px;
+    margin-left: 20px;
+    background-color: lightgray;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.opt-icon {
+    /*padding: 5px;
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+    margin-left: 20px;
+    background-color: gray;
+    border-radius: 10px;*/
+    cursor: pointer;
+}
+
+
+.ans-icon {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    height: 30px;
+    width: 100px;
+    margin: 5px;
+    margin-left: 20px;
+    background-color: lightgray;
+    border-radius: 10px; 
+    cursor: pointer;
+}
+
+
+.mcontent {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.modal--title {
+    flex: 0.1;
+    align-items: center;
+    justify-content: center;
+}
+
+.qarea {
+    flex: 0.4;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    width: 100%;
+    /* overflow: scroll; */
+}
+
+.qarea > h3 {
+    color: rgb(122, 117, 117);
+    height: 100px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.qarea > small {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    font-size: medium;
+}
+
+.editor {
+    flex: 0.5;
+}
+
+
+.ck-editor__editable_inline {
+    min-height: 170px;
+    max-height: 170px;
+}
+
+.editor__editable,
+/* Classic build. */
+main .ck-editor[role='application'] .ck.ck-content,
+/* Decoupled document build. */
+.ck.editor__editable[role='textbox'],
+.ck.ck-editor__editable[role='textbox'],
+/* Inline & Balloon build. */
+.ck.editor[role='textbox'] {
+  /* background-color: aqua; */
+  padding: 1.5em 2em;
+}
+
+.action-buttons {
+    flex: 0.1;
+}
+

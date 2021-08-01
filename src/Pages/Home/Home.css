@@ -1,0 +1,30 @@
+.main-content {
+    display: flex;
+    /* height: 100vh; */
+    /* background: fixed; */
+}
+
+.dummy-area {
+    flex: 0.25;
+    /* background:fixed; */
+    /* background-color: rgb(212, 208, 208) ; */
+    /* background-color: rgb(226, 225, 225); */
+    /* background: transparent; */
+}
+
+.que-feed {
+    flex: 0.5;
+    /* background-color: rgb(212, 208, 208) ; */
+    /* background-color: rgb(226, 225, 225); */
+    /* background: transparent; */
+    /* overflow:auto; */
+}
+
+
+/* @media screen and ( max-width: 600px) {
+    .que-feed {
+        flex : 1;
+        margin: 30px;
+    }
+} */
+
