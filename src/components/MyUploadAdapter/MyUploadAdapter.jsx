@@ -16,7 +16,7 @@ class MyUploadAdapter {
         new Promise((resolve, reject) => {
           let storage = firebase.storage().ref();
           let uploadTask = storage
-            .child(file.name)
+            .child("AnswerImages/" + file.name)
             .put(file, file.metadata);
           uploadTask.on(
             firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'

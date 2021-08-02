@@ -14,7 +14,7 @@ function AnswerBox({ qid , anid , answer , timestamp , Upvotes , Downvotes , noO
     const user = stateVal[0].user;
 
     const [hasUpvoted, setHasUpvoted] = useState(Upvotes.includes(user.uid));
-    console.log(Upvotes.includes(user.uid));
+    // console.log(Upvotes.includes(user.uid));
     const [hasDownvoted, setHasDownvoted] = useState(Downvotes.includes(user.uid));
 
     const answerRef = useRef(db.collection('Questions').doc(qid).collection('Answers').doc(anid));
@@ -104,7 +104,7 @@ function AnswerBox({ qid , anid , answer , timestamp , Upvotes , Downvotes , noO
         <div>
 
             <div className="feed-box">
-                {console.log(hasUpvoted)}
+                {/* {console.log(hasUpvoted)} */}
 
 
                     <div className="user-area">
@@ -120,7 +120,7 @@ function AnswerBox({ qid , anid , answer , timestamp , Upvotes , Downvotes , noO
                     { /* --------------Answer Area---------------- */ }
 
                     <div className="question-area" 
-                        style = {{ cursor : "default" , fontWeight : "lighter"}}
+                        style = {{ cursor : "default" , fontWeight : "lighter" , padding : "20px"}}
                     >
                         <p><strong>Answer :</strong></p>
                             {/* { ' ' + parse(JSON.parse(answer))} */}

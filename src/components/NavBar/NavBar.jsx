@@ -92,13 +92,14 @@ function NavBar() {
                         </div>
                     </div>
 
-
-                    <button className="askQuestion"
-                        onClick = {() => {
-                            setOpenModal(true);
-                            console.log("button clicked",openModal);
-                        }}
-                    >Ask Question</button>
+                    <div className="askQuestion">
+                        <button /*className="askQuestion"*/
+                            onClick = {() => {
+                                setOpenModal(true);
+                                console.log("button clicked",openModal);
+                            }}
+                        >Ask Question</button>
+                    </div>
 
             <Modal 
                 isOpen={openModal}

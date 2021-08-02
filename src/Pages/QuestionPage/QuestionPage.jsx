@@ -116,7 +116,7 @@ function QuestionPage() {
             <div className="ans-feed">
                 {/* {console.log(questionId)} */}
                 {/* {console.log(JSON.stringify(questionObj)) } */}
-                {console.log(answerList)}
+                {/* {console.log(answerList)} */}
                 
                 {
                     isLoading ? (
@@ -253,12 +253,13 @@ function QuestionPage() {
                                 editor={ Editor }
                                 data = {data}
                                 onChange = {handleChange}
-                                onInit={editor => {
+                                onReady = {editor => {
+                                    // console.log(editor);
                                     editor.plugins.get("FileRepository").isEnabled = true ;
                                     editor.plugins.get("FileRepository").createUploadAdapter = loader => {
                                       return new MyUploadAdapter(loader);
                                     };
-                                  }}
+                                }}
                                 config = {{
                                     toolbar: {
                                         items: [

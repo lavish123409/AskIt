@@ -75,12 +75,18 @@
 }
 
 .answer {
-    padding: 10px;
+    padding: 30px;
     font-weight: 400;
     font-family: 'Montserrant Alternates' ,Arial, Helvetica, sans-serif;
     font-size: 1.1em;
     overflow-x: hidden;
 }
+
+.answer > img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 
 .answer-area > small {
     padding: 10px;

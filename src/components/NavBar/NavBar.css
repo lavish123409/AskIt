@@ -12,7 +12,7 @@
 }
 
 .navbar-container {
-    /* background: rgb(255, 255, 255 , 0.7); */
+    background: rgb(255, 255, 255 , 0.7);
     flex: 0.85;
     height : 70px;
     display: flex;
@@ -82,16 +82,28 @@
 .askQuestion {
     /* padding: 10px; */
     flex: 0.15;
-    align-self: center;
-    justify-self: start;
+    /* align-self: center; */
+    /* justify-self: start; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height : 70px;
+    background: rgb(255, 255, 255 , 0.7);
+    
+    
+    
+}
+
+.askQuestion > button {
     height: 35px;
-    width: 120px;
+    width: 150px;
     background-color: var(--secondary);
     border: none;
     border-radius: 3px;
     font-family: 'Montserrant Alternates';
     font-size: 17px;
-    margin-right: 20px;
+    /* margin-right: 20px; */
+    cursor: pointer;
 }
 
 
@@ -343,7 +355,16 @@
     .askQuestion {
         /* padding: 5px; */
         flex: 0.15;
-        height: 50px;
+        
     }
+
+
+    .askQuestion > button {
+        /* padding: 5px; */
+        flex: 0.15;
+        height: 45px;
+        width: fit-content;
+    }
+
 
 }

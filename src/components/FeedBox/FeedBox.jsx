@@ -22,6 +22,7 @@ import { useStateValue } from '../ContextAPI/StateProvider';
 
 import firebase from 'firebase';
 import db from '../Firebase/firebase';
+import MyUploadAdapter from '../MyUploadAdapter/MyUploadAdapter';
 
 
 
@@ -216,8 +217,8 @@ function FeedBox({ qid , question , timestamp , quser }) {
             {/* In feed box!! */}
             {/* <p>{getAnswer.map(valu => <p>{valu}</p>)}</p> */}
             {/* {console.log(getAnswer , qid)} */}
-            {console.log('hasUpvoted' , hasUpvoted)}
-            {console.log('hasDownvoted' , hasDownvoted)}
+            {/* {console.log('hasUpvoted' , hasUpvoted)}
+            {console.log('hasDownvoted' , hasDownvoted)} */}
             
             {/* User Area */}
             
@@ -315,6 +316,13 @@ function FeedBox({ qid , question , timestamp , quser }) {
                                 editor={ Editor }
                                 data = {data}
                                 onChange = {handleChange}
+                                onReady = {editor => {
+                                    // console.log(editor);
+                                    editor.plugins.get("FileRepository").isEnabled = true ;
+                                    editor.plugins.get("FileRepository").createUploadAdapter = loader => {
+                                      return new MyUploadAdapter(loader);
+                                    };
+                                }}
                                 config = {{
                                     toolbar: {
                                         items: [
@@ -355,11 +363,7 @@ function FeedBox({ qid , question , timestamp , quser }) {
                                             'mergeTableCells'
                                         ]
                                     },
-                                    licenseKey: '',
-                                    ckfinder: {
-                                        // Upload the images to the server using the CKFinder QuickUpload command.
-                                        uploadUrl: 'http://localhost:3000/test/upload/image'
-                                    },
+                                    licenseKey: '',                                
                                     // fillEmptyBlocks : false
                                 }}
                             />
