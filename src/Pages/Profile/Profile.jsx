@@ -21,7 +21,7 @@ function Profile() {
 
     const { profileId } = useParams();
     const [isLoading, setIsLoading] = useState(true);
-    // var curr_user_stats = {};
+    const [progress, setProgress] = useState(false);
     const [given_user_stats, setGiven_user_stats] = useState({});
     const stateVal = useStateValue();
     const user = stateVal[0].user;
@@ -71,6 +71,7 @@ function Profile() {
 
     function uploadImage(file) {
         // console.log('running');
+        setProgress(true);
     
         let storage = firebase.storage().ref();
         let uploadTask = storage
@@ -109,7 +110,7 @@ function Profile() {
                     // Upload completed successfully, now we can get the download URL
                     uploadTask.snapshot.ref
                     .getDownloadURL()
-                    .then(function(downloadURL) {
+                    .then(async function(downloadURL) {
                         console.log("File available at", downloadURL);
                         stateVal[1]({
                             type : actionTypes.SET_USER,
@@ -119,9 +120,10 @@ function Profile() {
                                 photoUrl : downloadURL
                             }
                         });
-                        console.log('in upload');
-                        syncWithdb();
-                        console.log('this ran');
+                        
+                        await syncWithdb(downloadURL);
+
+                        window.location.reload();
                     });
                 }
                 );
@@ -130,31 +132,60 @@ function Profile() {
 
 
 
-    async function syncWithdb() {
-        console.log('in sync with db');
-        console.log(stateVal[0].user);
-
-        const user = stateVal[0].user;
+    async function syncWithdb(photoURL) {
 
         const useRef = db.collection('Users').doc(user.uid);
         console.log(useRef);
-        console.log('user photo url : ' , user.photoUrl);
 
         await useRef.update({
-            photoUrl : user.photoUrl
+            photoUrl : photoURL
         });
 
         const questionRef = await db.collection('Questions').where('user.uid' , '==' , user.uid).get();
 
         questionRef.docs.map( doc => {
             const docRef = db.collection('Questions').doc(doc.id);
-            console.log('ques id : ' , doc.id);
+
             return docRef.update({
-                    'user.photoUrl' : user.photoUrl
+                    'user.photoUrl' : photoURL
             });
         });
 
-        console.log('or this');
+
+        const allQuestions = await db.collection('Questions').get();
+
+        if(allQuestions.docs.length > 0)
+        {
+            // allQuestions.docs.map( async (qdoc) => {
+            //     console.log('qdoc : ' , qdoc.id , qdoc.data());
+            //     const answerRef =  await db.collection('Questions').doc(qdoc.id).collection('Answers').where('user.uid' , '==' , user.uid).get();
+            //     console.log(qdoc.id , answerRef.docs);
+    
+            //     /*const returnedVal = */return answerRef.docs.map( adoc => {
+            //         const docRef = db.collection('Questions').doc(qdoc.id).collection('Answers').doc(adoc.id);
+            //         console.log('ans id : ' , adoc.id);
+            //         return docRef.update({
+            //                 'user.photoUrl' : photoURL
+            //         });
+            //     });
+            //     /*return returnedVal;*/
+            // });
+            for(const quesDoc in allQuestions.docs)
+            {
+                
+                const answerRef =  await db.collection('Questions').doc(allQuestions.docs[quesDoc].id).collection('Answers').where('user.uid' , '==' , user.uid).get();
+                // console.log(allQuestions.docs[quesDoc].id , answerRef.docs);
+    
+                answerRef.docs.map( adoc => {
+                    const docRef = db.collection('Questions').doc(allQuestions.docs[quesDoc].id).collection('Answers').doc(adoc.id);
+
+                    return docRef.update({
+                            'user.photoUrl' : photoURL
+                    });
+                });
+            }
+        }
+
     }
 
 
@@ -199,6 +230,15 @@ function Profile() {
                             />
                         )}
                         <h2>{given_user_stats.data.name}</h2>
+                        {
+                            progress && (
+                                <CircularProgress 
+                                    style = {{
+                                        marginLeft : "100px"
+                                    }}
+                                />
+                            )
+                        }
                     </div>
                     <div className="stats">
                         <h3>Number of Questions asked : <span>{given_user_stats.data.noOfQuestions}</span></h3>

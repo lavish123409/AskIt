@@ -128,7 +128,7 @@ function FeedBox({ qid , question , timestamp , quser }) {
             noOfUpvotes : 0,
             noOfDownvotes : 0,
             user : user
-        }).then(console.log('Answer added!!'));
+        });
 
         const userRef = db.collection('Users').doc(user.uid);
         const increment = firebase.firestore.FieldValue.increment(+1);

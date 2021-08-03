@@ -22,7 +22,7 @@ class MyUploadAdapter {
             firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
             function(snapshot) {
               // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-              var progress =
+              /*var progress =
                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
               console.log("Upload is " + progress + "% done");
               switch (snapshot.state) {
@@ -34,7 +34,7 @@ class MyUploadAdapter {
                   break;
                   default : 
                   console.log('Default case of upload!!');
-              }
+              }*/
             },
             function(error) {
               // A full list of error codes is available at
