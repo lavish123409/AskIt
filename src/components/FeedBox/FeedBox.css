@@ -75,16 +75,58 @@
 }
 
 .answer {
-    padding: 30px;
+    padding: 10px;
     font-weight: 400;
     font-family: 'Montserrant Alternates' ,Arial, Helvetica, sans-serif;
     font-size: 1.1em;
     overflow-x: hidden;
 }
 
+.answer > * {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.question-area > * {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .answer > img {
     max-width: 100%;
     max-height: 100%;
+}
+
+ul , ol {
+    padding-left: 15px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+border: 1px solid #bdbdbd;
+text-align: left;
+padding: 8px;
+}
+
+tr:nth-child(even) {
+background-color: #dddddd;
+}
+
+blockquote {
+    border-left: 5px solid #afafaf;
+    padding-left: 15px;
+}
+
+pre {
+    padding: 13px;
+    background-color: rgb(141 141 141);
+    border: 1px solid gray;
+    border-radius: 4px;
 }
 
 

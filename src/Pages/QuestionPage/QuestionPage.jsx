@@ -301,6 +301,7 @@ function QuestionPage() {
                                         ]
                                     },
                                     licenseKey: '',
+                                    // removePlugins : 'htmlwriter'
                                     // ckfinder: {
                                     //     // Upload the images to the server using the CKFinder QuickUpload command.
                                     //     uploadUrl: 'http://localhost:3000/test/upload/image'

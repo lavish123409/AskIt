@@ -120,12 +120,13 @@ function AnswerBox({ qid , anid , answer , timestamp , Upvotes , Downvotes , noO
                     { /* --------------Answer Area---------------- */ }
 
                     <div className="question-area" 
-                        style = {{ cursor : "default" , fontWeight : "lighter" , padding : "20px"}}
+                        style = {{ cursor : "default" , fontWeight : "lighter" , padding : "1.5em 2em"}}
                     >
                         <p><strong>Answer :</strong></p>
                             {/* { ' ' + parse(JSON.parse(answer))} */}
                             {/* {console.log(typeof answer)} */}
                             {parse(answer)}
+                            {/* {htmlspecialchars(answer, ENT_QUOTES, "UTF-8")} */}
 
                     </div>
 

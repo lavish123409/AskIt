@@ -112,15 +112,18 @@ function Profile() {
                     .getDownloadURL()
                     .then(async function(downloadURL) {
                         console.log("File available at", downloadURL);
+                        const new_user = {
+                            uid : user.uid,
+                            name : user.name,
+                            photoUrl : downloadURL
+                        };
                         stateVal[1]({
                             type : actionTypes.SET_USER,
-                            user : {
-                                uid : user.uid,
-                                name : user.name,
-                                photoUrl : downloadURL
-                            }
+                            user : new_user
                         });
                         
+                        localStorage.setItem('user', JSON.stringify(new_user));
+
                         await syncWithdb(downloadURL);
 
                         window.location.reload();
