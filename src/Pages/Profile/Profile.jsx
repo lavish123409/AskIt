@@ -94,7 +94,9 @@ function Profile() {
                     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                     var progress =
                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log("Upload is " + progress + "% done");
+                    if(progress === 100)
+                    alert('Your Profile picture has been uploaded !!');
+                    // console.log("Upload is " + progress + "% done");
                 },
                 function(error) {
                     // A full list of error codes is available at
@@ -121,7 +123,7 @@ function Profile() {
                     uploadTask.snapshot.ref
                     .getDownloadURL()
                     .then(async function(downloadURL) {
-                        console.log("File available at", downloadURL);
+                        // console.log("File available at", downloadURL);
                         const new_user = {
                             uid : user.uid,
                             name : user.name,
@@ -148,7 +150,7 @@ function Profile() {
     async function syncWithdb(photoURL) {
 
         const useRef = db.collection('Users').doc(user.uid);
-        console.log(useRef);
+        // console.log(useRef);
 
         await useRef.update({
             photoUrl : photoURL

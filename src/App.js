@@ -72,8 +72,8 @@ function App() {
 
       {!stateVal[0].user ? (
         <Switch>
-          <Route path="/" component={SignIn}/>
           <Route path="/signup" exact component={SignUp}/>
+          <Route path="/" component={SignIn}/>
         </Switch>
       ) : (
         <div>

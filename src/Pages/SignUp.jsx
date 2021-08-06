@@ -81,7 +81,7 @@ export default function SignUp() {
           //   photoUrl : ""
           // }
 
-          console.log('credential' , credential);
+          // console.log('credential' , credential);
 
           const curr_user = {
             uid : credential.user.uid,
@@ -107,7 +107,7 @@ export default function SignUp() {
           }).then(() => {
             window.location.replace('/');
             // window.history.replaceState({},"Home Page","/");
-            console.log('User added to db');
+            // console.log('User added to db');
           });
           
           

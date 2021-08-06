@@ -28,7 +28,7 @@ function About() {
                 </ol>
                 <br/>
             <p>
-                If you find any bug or problem, you can report it <a href = "https://github.com/lavish123409/Quiz-App/issues">here</a>.
+                If you find any bug or problem, you can report it <a href = "https://github.com/lavish123409/AskIt/issues">here</a>.
                 I will try to overcome these shortcomings in near future. So, till then you can explore it and have fun.
                 <br/><br/>
                 <a href = "https://youtu.be/dQw4w9WgXcQ">An Important message !!</a>

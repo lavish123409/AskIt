@@ -130,6 +130,9 @@ function NavBar() {
                 center
                 appElement={document.getElementById('root')}
                 className = "modal"
+                style = {{
+                    overlay : {zIndex : 4}
+                }}
             >
 
                 <div className="mcontent">
@@ -166,7 +169,7 @@ function NavBar() {
                         <Input 
                             required
                             type = "text"
-                            placeholder = "Start your question with 'What' , 'Why' , 'How' etc...."
+                            placeholder = "Start your question with 'What' , 'Why' , 'How' etc.... and end with '?'"
                             className = "question-input"
                             value = {question}
                             onChange = {(e) => setQuestion(e.target.value)}
