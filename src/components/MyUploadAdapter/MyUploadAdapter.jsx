@@ -1,7 +1,3 @@
-// import React from "react";
-// import CKEditor from "@ckeditor/ckeditor5-react";
-// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-//import firbase from your directory
 import firebase from 'firebase';
 
 
@@ -22,9 +18,12 @@ class MyUploadAdapter {
             firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
             function(snapshot) {
               // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-              /*var progress =
+              var progress =
                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              console.log("Upload is " + progress + "% done");
+
+              if(progress === 100)
+              alert('Your image has been uploaded !!');
+              /*console.log("Upload is " + progress + "% done");
               switch (snapshot.state) {
                 case firebase.storage.TaskState.PAUSED: // or 'paused'
                   console.log("Upload is paused");

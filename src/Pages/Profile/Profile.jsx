@@ -14,30 +14,40 @@ import firebase from 'firebase';
 
 import { useStateValue } from '../../components/ContextAPI/StateProvider';
 import { actionTypes } from '../../components/ContextAPI/Reducer';
+import { IoReloadCircleOutline } from 'react-icons/io5';
 
 
 
 function Profile() {
 
     const { profileId } = useParams();
+
     const [isLoading, setIsLoading] = useState(true);
     const [progress, setProgress] = useState(false);
     const [given_user_stats, setGiven_user_stats] = useState({});
+
     const stateVal = useStateValue();
     const user = stateVal[0].user;
 
     useEffect(() => {
         // console.log('profileId : ' , profileId , 'type : ' , profileId.type);
 
+        let isMounted = true;               // note mutable flag
+
         db.collection('Users').doc(profileId).get()
         .then( (doc) => {
             // given_user_stats = JSON.parse(JSON.stringify(doc.data()))
-            setGiven_user_stats({
-                id : doc.id,
-                data : doc.data()
-            });
-            setIsLoading(false);
+            if(isMounted)
+            {
+                setGiven_user_stats({
+                    id : doc.id,
+                    data : doc.data()
+                });
+                setIsLoading(false);
+            }
         });
+
+        return () => { isMounted = false }; // cleanup toggles value, if unmounted
 
     }, [profileId]);
 
@@ -70,7 +80,7 @@ function Profile() {
 
 
     function uploadImage(file) {
-        // console.log('running');
+        
         setProgress(true);
     
         let storage = firebase.storage().ref();
@@ -197,73 +207,100 @@ function Profile() {
 
 
     const handleLogout = () => {
-        // setUser({});
+
         stateVal[1]({
             type : actionTypes.LOGOUT_USER
         });
         localStorage.clear();
         window.location.replace('/');
-      };
+
+    };
+
+
 
     return (
         <>
-            {isLoading ? (
-                <CircularProgress style = {{ marginLeft : "50%" , marginTop : "10%"}}/>
-            ) : (
-                <div className = "profile">
-                    <h1>User Profile</h1>
-                    <div className="user-info">
-                        <Avatar src = {given_user_stats.data.photoUrl} />
-                        {
-                        user.uid === given_user_stats.id && (                        
-                        <CreateOutlinedIcon
-                                style ={{
-                                    background : "#3166f7",
-                                    marginLeft : "-18px",
-                                    zIndex : "3",
-                                    color : "#e2e2e2",
-                                    fontSize : "1.7rem",
-                                    borderRadius : "50%",
-                                    boxShadow: "0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%)",
-                                    padding : "5px",
-                                    cursor : "pointer"
-                                }}
+            {
+            navigator.onLine ? (
 
-                                onClick = {changeProfilePic}
-                            />
-                        )}
-                        <h2>{given_user_stats.data.name}</h2>
-                        {
-                            progress && (
-                                <CircularProgress 
-                                    style = {{
-                                        marginLeft : "100px"
+
+                isLoading ? (
+                    <CircularProgress style = {{ marginLeft : "50%" , marginTop : "10%"}}/>
+                ) : (
+                    <div className = "profile">
+                        <h1>User Profile</h1>
+                        <div className="user-info">
+                            <Avatar src = {given_user_stats.data.photoUrl} />
+                            {
+                            user.uid === given_user_stats.id && (                        
+                            <CreateOutlinedIcon
+                                    style ={{
+                                        background : "#3166f7",
+                                        marginLeft : "-18px",
+                                        zIndex : "3",
+                                        color : "#e2e2e2",
+                                        fontSize : "1.7rem",
+                                        borderRadius : "50%",
+                                        boxShadow: "0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%)",
+                                        padding : "5px",
+                                        cursor : "pointer"
                                     }}
+
+                                    onClick = {changeProfilePic}
                                 />
+                            )}
+                            <h2>{given_user_stats.data.name}</h2>
+                            {
+                                progress && (
+                                    <CircularProgress 
+                                        style = {{
+                                            marginLeft : "100px"
+                                        }}
+                                    />
+                                )
+                            }
+                        </div>
+                        <div className="stats">
+                            <h3>Number of Questions asked : <span>{given_user_stats.data.noOfQuestions}</span></h3>
+                            <h3>Number of Answers given : <span>{given_user_stats.data.noOfAnswers}</span></h3>
+                        </div>
+                        {
+                            user.uid === given_user_stats.id && (
+                                <Button variant = "contained" color = "secondary" size = "large"
+                                    style ={{ marginLeft : "20%" , marginTop : "40px"}}
+                                    endIcon = {<ExitToAppIcon/> }
+                                    onClick = {handleLogout}
+                                >
+                                    Log Out
+                                </Button>
                             )
                         }
+                        
                     </div>
-                    <div className="stats">
-                        <h3>Number of Questions asked : <span>{given_user_stats.data.noOfQuestions}</span></h3>
-                        <h3>Number of Answers given : <span>{given_user_stats.data.noOfAnswers}</span></h3>
-                    </div>
-                    {
-                        user.uid === given_user_stats.id && (
-                            <Button variant = "contained" color = "secondary" size = "large"
-                                style ={{ marginLeft : "20%" , marginTop : "40px"}}
-                                endIcon = {<ExitToAppIcon/> }
-                                onClick = {handleLogout}
-                            >
-                                Log Out
-                            </Button>
-                        )
-                    }
-                    {/* We are on profie page!!
-                    My name is {given_user_stats.name}
-                    I have asked {given_user_stats.noOfQuestions} questions and
-                    I have given {given_user_stats.noOfAnswers} answers. */}
+
+                )
+
+            ) : (
+                <div className = "net-error">
+                    <IoReloadCircleOutline
+                        style = {{
+
+                                fontSize: "1.8em",
+                                strokeWidth: "0.01em",
+                                marginBottom: "20px",
+                                cursor: "pointer"
+
+                        }}
+                        onClick = {() => window.location.reload()}
+                    />
+                    <p>
+                        It seems you are Offline. Kindly check your network connection and Try again !!
+                    </p>
                 </div>
-            )}
+            )
+            
+            
+            }
         </>
     )
 }

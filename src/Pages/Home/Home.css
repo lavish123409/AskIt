@@ -20,11 +20,38 @@
     /* overflow:auto; */
 }
 
+.net-error {
 
-/* @media screen and ( max-width: 600px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 200px;
+        width: 600px;
+        margin: auto;
+        margin-top: 10%;
+        font-size: 1.5em;
+        line-height: 1.7;
+        border: 3px solid red;
+        text-align: center;
+        flex-direction: column;    
+        border-radius: 10px;
+        background: #efc2c2;
+        color: #ea0e0e;
+}
+
+
+@media screen and ( max-width: 600px) {
     .que-feed {
         flex : 1;
-        margin: 30px;
+        width: 100%;
+        /* margin: 30px; */
     }
-} */
+    .dummy-area {
+        flex: 0;
+    }
+    .net-error {
+        margin-top: 25%;
+        width: 100%;
+    }
+}
 

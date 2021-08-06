@@ -31,10 +31,16 @@ img {
     max-height: 100%;
 }
 
-/* @media screen and ( max-width: 600px) {
-    .que-feed {
+
+@media screen and ( max-width: 600px) {
+    .ans-feed {
         flex : 1;
-        margin: 30px;
+        width: 100%;
+        /* margin: 30px; */
     }
-} */
+    .qdummy-area {
+        flex: 0;
+    }
+}
+
 

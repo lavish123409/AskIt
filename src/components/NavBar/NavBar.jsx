@@ -1,13 +1,20 @@
 import React , {useState} from 'react';
+
 import { NavItems } from "./NavItems";
+import "./NavBar.css";
+
 import { AiOutlineClose } from "react-icons/ai";
 import { AiOutlineAlignRight } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi"; 
-import "./NavBar.css";
+
 import { Link } from "react-router-dom";
+
 import Modal from 'react-modal';
+
 import { Avatar, Input } from '@material-ui/core'
+
 import { useStateValue } from '../ContextAPI/StateProvider';
+
 import db from '../Firebase/firebase';
 import firebase from "firebase";
 
@@ -25,12 +32,17 @@ function NavBar() {
     }
 
     const closeMobileMenu = () => {
-        // localStorage.clear();
         setClick( false );
     }
 
 
     const addQuestion = () => {
+
+        if(!navigator.onLine)
+        {
+            alert('Kindly connect to the Internet and then try again !!!');
+            return ;
+        }
         
         if(question === "")
         {
@@ -60,16 +72,22 @@ function NavBar() {
     return (
         <>
             <nav className="navbar">
+
                 <div className="main-section">
+
                     <div className="navbar-container">
+
+
                         <Link to="/" className="navbar-logo" onClick = {closeMobileMenu}>
                             Ask-IT
                         </Link>
                         
+
                         <div className="menu-icon" onClick = {menuIconClicked}>
                             { click ? (<AiOutlineClose className = "icon"/>) : (<AiOutlineAlignRight className = "icon"/>)}
                         </div>
                         
+
                         <ul className = { click ? "nav-menu active" : "nav-menu" }>
                             {NavItems.map( (item , index) => {
                                 return (
@@ -85,21 +103,26 @@ function NavBar() {
                                 )
                             } )}
                         </ul>
-                        {/* <Button btnSize="btn--medium" btnStyle = "btn--rounded">Make A Team</Button> */}
+                        
+
                         <div className="search-box">
                             <BiSearchAlt className = "icon" />
                             <input type="text" placeholder="Search the Question..." />
                         </div>
+
+
                     </div>
+
 
                     <div className="askQuestion">
                         <button /*className="askQuestion"*/
                             onClick = {() => {
                                 setOpenModal(true);
-                                console.log("button clicked",openModal);
+                                // console.log("button clicked",openModal);
                             }}
                         >Ask Question</button>
                     </div>
+
 
             <Modal 
                 isOpen={openModal}
@@ -108,7 +131,9 @@ function NavBar() {
                 appElement={document.getElementById('root')}
                 className = "modal"
             >
+
                 <div className="mcontent">
+
                     <div className="modal--title">
                         <h1>Add Question</h1>
                         <AiOutlineClose 
@@ -116,19 +141,27 @@ function NavBar() {
                             onClick = {() => setOpenModal(false)}
                         />
                     </div>
+
                     <div className="user--area">
                         <Link 
                             to="/profile/:profileId"
                             className="ua--link"
                             onClick = {() => setOpenModal(false)}
                         >
+
                             <div className="ua--avatar">
                                 <Avatar src = {user.photoUrl}/>
                             </div>
+
                             <h4>{user.name}</h4>
+
                         </Link>
+
                         <h4>{"   asked :"}</h4>
+
                     </div>
+
+
                     <div className="qinput--wrapper">
                         <Input 
                             required
@@ -139,14 +172,19 @@ function NavBar() {
                             onChange = {(e) => setQuestion(e.target.value)}
                         />
                     </div>
+
+
                     <div className="action-buttons">
                         <button onClick = {() => setOpenModal(false)} className = "act-buttons">Cancel</button>
                         <button onClick = {addQuestion} className = "act-buttons adq-button">Add Question</button>
                     </div>
-                </div>
-            </Modal>
+
 
                 </div>
+
+            </Modal>
+
+            </div>
                 
             </nav>
         </>

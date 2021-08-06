@@ -1,5 +1,5 @@
 import { Avatar } from '@material-ui/core';
-import React, { /*useEffect,*/ useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FaArrowDown, FaArrowUp, FaRegComments } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
@@ -19,13 +19,6 @@ function AnswerBox({ qid , anid , answer , timestamp , Upvotes , Downvotes , noO
 
     const answerRef = useRef(db.collection('Questions').doc(qid).collection('Answers').doc(anid));
 
-    // useEffect(() => {
-    //     answerRef.current.
-    // }, []);
-
-    // function upvote() {
-    //     ;
-    // }
 
 
     function upvote() {
@@ -120,7 +113,7 @@ function AnswerBox({ qid , anid , answer , timestamp , Upvotes , Downvotes , noO
                     { /* --------------Answer Area---------------- */ }
 
                     <div className="question-area" 
-                        style = {{ cursor : "default" , fontWeight : "lighter" , padding : "1.5em 2em"}}
+                        style = {{ cursor : "default" , fontWeight : "lighter" , padding : "1.5em 2em" , overflowX : "scroll"}}
                     >
                         <p><strong>Answer :</strong></p>
                             {/* { ' ' + parse(JSON.parse(answer))} */}
@@ -137,7 +130,7 @@ function AnswerBox({ qid , anid , answer , timestamp , Upvotes , Downvotes , noO
                         <div style = {{display : "flex"}}>
                             <span className = "opt-icon-container"><FaArrowUp className="opt-icon" onClick = {() => upvote()}/>{noOfUpvotes}</span>
                             <span className = "opt-icon-container"><FaArrowDown className="opt-icon" onClick = {() => downvote()}/> {noOfDownvotes} </span>
-                            <span className = "opt-icon-container" style = {{width : "30px"}}><FaRegComments className="opt-icon" style = {{margin : "auto"}}/></span>
+                            <span className = "opt-icon-container" style = {{width : "30px"}}><FaRegComments className="opt-icon" style = {{margin : "auto"}} onClick = {() => alert('Comments feature is not added yet !!')}/></span>
                         </div>
 
                     </div>

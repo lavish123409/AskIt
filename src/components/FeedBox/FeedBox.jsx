@@ -46,13 +46,16 @@ function FeedBox({ qid , question , timestamp , quser }) {
 
 
     useEffect(() => {
+
+        let isMounted = true;               // note mutable flag
+
         db.collection('Questions').doc(qid).collection('Answers')
         .orderBy('noOfUpvotes' , 'desc')
         .orderBy('timestamp' , 'desc')
         .limit(1)
         .onSnapshot( snapshot => {
 
-            if(snapshot.docs.length > 0)
+            if(isMounted && snapshot.docs.length > 0)
             {
                 setgetAnswer(
                     snapshot.docs.map( (doc) => ({
@@ -60,8 +63,7 @@ function FeedBox({ qid , question , timestamp , quser }) {
                         obj : doc.data()
                     }))
                 );
-                // answerRef.current = snapshot.docs[0];
-                // console.log(answerRef.current);
+                
                 setHaveAnswer(true);
             }
 
@@ -77,24 +79,38 @@ function FeedBox({ qid , question , timestamp , quser }) {
             else
             setHaveAnswer(false);                 
             } )*/
-        }
-        );
+        });
 
+        return () => { isMounted = false }; // cleanup toggles value, if unmounted
 
     }, [qid]);
 
 
     useEffect( () => {
-        answerRef.current = db.collection('Questions').doc(qid).collection('Answers').doc(getAnswer[0]?.id);
+
+        let isMounted = true;               // note mutable flag
+
+        if(isMounted)
+            answerRef.current = db.collection('Questions').doc(qid).collection('Answers').doc(getAnswer[0]?.id);
+
+        return () => { isMounted = false }; // cleanup toggles value, if unmounted
+
     } , [qid,getAnswer] );
 
 
     useEffect(() => {
 
-        setHasUpvoted(getAnswer[0]?.obj?.upVotes?.includes(user.uid));
-        setHasDownvoted(getAnswer[0]?.obj?.downVotes?.includes(user.uid));
-        // setHasUpvoted(answerRef?.current?.data()?.upVotes?.includes(user.uid));
-        // setHasDownvoted(answerRef?.current?.data()?.downVotes?.includes(user.uid));
+        let isMounted = true;               // note mutable flag
+
+        if(isMounted)
+        {
+            setHasUpvoted(getAnswer[0]?.obj?.upVotes?.includes(user.uid));
+            setHasDownvoted(getAnswer[0]?.obj?.downVotes?.includes(user.uid));
+            // setHasUpvoted(answerRef?.current?.data()?.upVotes?.includes(user.uid));
+            // setHasDownvoted(answerRef?.current?.data()?.downVotes?.includes(user.uid));
+        }
+
+        return () => { isMounted = false }; // cleanup toggles value, if unmounted
     }, [user,getAnswer]);
 
 
@@ -261,13 +277,13 @@ function FeedBox({ qid , question , timestamp , quser }) {
                     <div style = {{display : "flex"}}>
                         <span className = "opt-icon-container"><FaArrowUp className="opt-icon" onClick = {() => upvote()}/> {getAnswer[0].obj.noOfUpvotes}</span>
                         <span className = "opt-icon-container"><FaArrowDown className="opt-icon" onClick = {() => downvote()}/> {getAnswer[0].obj.noOfDownvotes}</span>
-                        <span className = "opt-icon-container" style = {{width : "30px"}}><FaRegComments className="opt-icon" style = {{margin : "auto"}}/></span>
+                        <span className = "opt-icon-container" style = {{width : "30px"}}><FaRegComments className="opt-icon" style = {{margin : "auto"}} onClick = {() => alert('Comments feature is not added yet !!')}/></span>
                     </div>
                     ) : (
                         <div className="ans-icon"
                         onClick = {() => {
                             setOpenModal(true);
-                            console.log("button clicked",openModal);
+                            // console.log("button clicked",openModal);
                         }}
                         >
                             <BsPencilSquare />
@@ -341,7 +357,7 @@ function FeedBox({ qid , question , timestamp , quser }) {
                                             'blockQuote',
                                             'codeBlock',
                                             'insertTable',
-                                            'mediaEmbed',
+                                            // 'mediaEmbed',
                                             'findAndReplace',
                                             'undo',
                                             'redo'

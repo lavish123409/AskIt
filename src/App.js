@@ -2,7 +2,7 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import Home from './Pages/Home/Home';
-import About from './Pages/About';
+import About from './Pages/About/About';
 import Profile from './Pages/Profile/Profile';
 import SignIn from './Pages/SignIn';
 import SignUp from './Pages/SignUp';
@@ -72,7 +72,7 @@ function App() {
 
       {!stateVal[0].user ? (
         <Switch>
-          <Route path="/" exact component={SignIn}/>
+          <Route path="/" component={SignIn}/>
           <Route path="/signup" exact component={SignUp}/>
         </Switch>
       ) : (

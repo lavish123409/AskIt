@@ -135,7 +135,7 @@ export default function SignUp() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" p = {15} style = {{backgroundColor : "white" , borderRadius : "5px"}}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

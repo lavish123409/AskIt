@@ -37,17 +37,22 @@ function QuestionPage() {
     
     useEffect(() => {
         // console.log('profileId : ' , questionId , 'type : ' , questionId.type);
+        let isMounted = true;               // note mutable flag
+
 
         const questionRef = db.collection('Questions').doc(questionId);
         
         
         questionRef.get().then( (doc) => {
 
-            setQuestionObj({
-                id : doc.id,
-                data : doc.data()
-            });
-            setIsLoading(false);
+            if(isMounted)
+            {
+                setQuestionObj({
+                    id : doc.id,
+                    data : doc.data()
+                });
+                setIsLoading(false);
+            }
             
         });
 
@@ -56,16 +61,19 @@ function QuestionPage() {
         .orderBy('timestamp' , 'desc')
         .onSnapshot( snapshot => {
 
-            setAnswerList(
-                snapshot.docs.map( (doc) => ({
-                    id : doc.id,
-                    answerObj : doc.data()
-                }))
-            );
+            if(isMounted)
+            {
+                setAnswerList(
+                    snapshot.docs.map( (doc) => ({
+                        id : doc.id,
+                        answerObj : doc.data()
+                    }))
+                );
+            }
 
         });
 
-
+        return () => { isMounted = false }; // cleanup toggles value, if unmounted
     }, [questionId]);
 
 
@@ -207,6 +215,15 @@ function QuestionPage() {
                     ))
                 }
 
+                <p
+                    style = {{
+                            textAlign: "center",
+                            fontWeight: "100",
+                            color: "#5f5f5f",
+                            marginBottom: "15px"
+                    }}
+                >No more Answers !!!</p>
+
 
                 <Modal 
                         isOpen={openModal}
@@ -278,7 +295,7 @@ function QuestionPage() {
                                             'blockQuote',
                                             'codeBlock',
                                             'insertTable',
-                                            'mediaEmbed',
+                                            // 'mediaEmbed',
                                             'findAndReplace',
                                             'undo',
                                             'redo'

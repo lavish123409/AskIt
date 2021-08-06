@@ -70,7 +70,6 @@
 .answer-area {
     min-height: 90px;
     /* background-color: rgb(198, 211, 127); */
-    /* max-width: 300px; */
     /* word-break: break-all; */
 }
 
@@ -81,6 +80,8 @@
     font-size: 1.1em;
     overflow-x: hidden;
 }
+
+/* ---------Answer decoration------------ */
 
 .answer > * {
     margin-top: 10px;
@@ -117,16 +118,17 @@ tr:nth-child(even) {
 background-color: #dddddd;
 }
 
-blockquote {
+.answer > blockquote , .question-area > blockquote {
     border-left: 5px solid #afafaf;
     padding-left: 15px;
 }
 
-pre {
+.answer > pre , .question-area > pre {
     padding: 13px;
     background-color: rgb(141 141 141);
-    border: 1px solid gray;
+    border: 1px solid #2c2c2c;
     border-radius: 4px;
+    /* width: fit-content; */
 }
 
 
@@ -153,11 +155,6 @@ pre {
     /* background-color: rgb(221, 57, 57); */
 }
 
- /* .options > MuiSvgIcon:root {
-    padding : 10px;
-    height: 1px;
-    width: 1px;
-}   */
 
 .opt-icon-container {
     padding: 5px;
@@ -174,13 +171,6 @@ pre {
 
 
 .opt-icon {
-    /*padding: 5px;
-    height: 30px;
-    width: 30px;
-    margin: 5px;
-    margin-left: 20px;
-    background-color: gray;
-    border-radius: 10px;*/
     cursor: pointer;
 }
 
