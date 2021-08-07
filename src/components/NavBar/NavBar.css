@@ -327,6 +327,11 @@
         outline: auto;
     }
 
+    
+    .qinput--wrapper > .MuiInputBase-root {
+        font-size: 0.6em;
+    }
+
     .askQuestion {
         /* padding: 5px; */
         flex: 0.15;
@@ -339,6 +344,10 @@
         flex: 0.15;
         height: 45px;
         width: fit-content;
+    }
+
+    .navbar > .mcontent {
+        height: 70%;
     }
 
 

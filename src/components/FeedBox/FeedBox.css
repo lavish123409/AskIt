@@ -251,3 +251,45 @@ main .ck-editor[role='application'] .ck.ck-content,
     flex: 0.1;
 }
 
+
+@media screen and ( max-width: 600px) {
+    .mcontent {
+        width: 97%;
+        height: 80%;
+        padding: 15px;
+    }
+
+    .modal--title {
+        font-size: 0.7em;
+    }
+
+    .qarea {
+        margin-top: 15px;
+        font-size: 0.7em;
+    }
+
+    .qarea > small {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+
+    .action-buttons {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
+        margin-left: 0;
+    }
+
+    .act-buttons {
+        /* height:fit-content; */
+        /* flex: content; */
+        margin: 0;
+        /* margin-right: auto; */
+    }
+
+    .adq-button {
+        margin-left: auto;
+    }
+}
+

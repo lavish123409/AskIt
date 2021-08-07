@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 firebase-debug.log
+.firebase/hosting.YnVpbGQ.cache
+.firebaserc
+firebase.json
 
 # testing
 /coverage

@@ -41,3 +41,27 @@
 .stats > h3 > span {
     font-weight: 300;
 }
+
+@media screen and ( max-width: 600px) {
+    .profile{
+        /* width: 100%; */
+        width: 100vw;
+        padding: 25px;
+    }
+
+    .user-info {
+        margin: 0;
+        margin-top: 10px;
+    }
+
+    .user-info > .MuiAvatar-root {
+        margin: 0;
+    }
+
+    .user-info > h2 {
+        margin-left: 30px;
+        font-size: 1.2em;
+        line-height: 1.5;
+    }
+    
+}
